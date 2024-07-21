@@ -39,17 +39,17 @@ export default class splash extends Phaser.Scene {
         this.creditsButton = this.add.image(this.settingsButton.x, this.settingsButton.y + this.settingsButton.displayHeight + 10, 'ui_button1').setInteractive();
         this.creditsButton.setDisplaySize(this.creditsButton.width * 0.75, this.creditsButton.height * 0.75)
 
-        this.creditsText = this.add.bitmapText(this.creditsButton.x, this.creditsButton.y, 'modernist', 'Quit').setTint(0x9A7D5C)
+        this.creditsText = this.add.bitmapText(this.creditsButton.x, this.creditsButton.y, 'modernist', 'Credits').setTint(0x9A7D5C)
             .setOrigin(0.5)
 
         this.playButton.on('pointerdown', () => {
             alert('playButton clicked');
         })
         this.creditsButton.on('pointerdown', () => {
-            alert('creditsButton \n clicked');
+            this.scene.start("splash_credits")
         })
         this.settingsButton.on('pointerdown', () => {
-            alert('settingsButton clicked');
+            alert('I add some settings (like switching language) later maybe');
         })
     }
 

@@ -3,6 +3,7 @@ import Bootloader from "./scenes/bootloader";
 import Outro from "./scenes/outro";
 import Splash from "./scenes/splash";
 import Game from "./scenes/game";
+import splash_credits from "./scenes/splash_credits";
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
@@ -24,7 +25,7 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
     autoRound: false,
-    scene: [Bootloader, Splash, Game, Outro],
+    scene: [Bootloader, Splash, splash_credits, Game, Outro],
     };
 
 const game = new Phaser.Game(config);
