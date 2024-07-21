@@ -138,7 +138,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.flipX = this.body.velocity.x < 0;
             this.body.setVelocityX(this.walkVelocity);
         } else if (this.cursor.left.isDown || this.A.isDown) {
-            this.shooting = false;
+            this.shooti false;
             if (this.body.blocked.down) {
                 this.anims.play("playerwalk", true);
             }

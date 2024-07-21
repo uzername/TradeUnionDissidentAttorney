@@ -60,7 +60,10 @@ export default class bootloader extends Phaser.Scene {
             frameHeight: 64,
         });
 
-        this.load.spritesheet("dungeoncastle", "assets/images/dungeoncastle.png", {frameWidth:32, frameHeight:32});
+        this.load.spritesheet("dungeoncastle", "assets/images/dungeoncastle.png", { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet("officetiles", "assets/images/officetiles.png", { frameWidth: 32, frameHeight: 32 });
+        this.load.tilemapTiledJSON(`sceneoffice`, `assets/maps/office.json`);
+
         this.load.image("landscape", "assets/images/landscape_city37.png");
         this.load.image("ui_frame", "assets/UI/drawing.png");
         this.load.image("ui_button1", "assets/UI/button1.png");

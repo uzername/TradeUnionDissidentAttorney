@@ -43,7 +43,7 @@ export default class splash extends Phaser.Scene {
             .setOrigin(0.5)
 
         this.playButton.on('pointerdown', () => {
-            alert('playButton clicked');
+            this.scene.start("game")
         })
         this.creditsButton.on('pointerdown', () => {
             this.scene.start("splash_credits")

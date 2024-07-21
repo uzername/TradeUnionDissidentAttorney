@@ -22,11 +22,34 @@ export default class Game extends Phaser.Scene {
         this.playMusic();
     }
     createMap() {
+        // TODO proper map selection
+        this.tileMap = this.make.tilemap({
+            key: "sceneoffice",
+            tileWidth: 32,
+            tileHeight: 32,
+        });
+
+        console.log(this.tileMap);
+
+        this.tileSet = this.tileMap.addTilesetImage("officetiles");
+
+        this.objectsLayer = this.tileMap.getObjectLayer("objects");
 
     }
+    /*
+   We add the player to the game and we add the colliders between the player and the rest of the elements. The starting position of the player is defined on the tilemap.
+   */
     addPlayer() {
+        this.elements = this.add.group();
+        this.coins = this.add.group();
+
+        const playerPosition = this.objectsLayer.objects.find(
+            (object) => object.name === "player"
+        );
+        this.player = new Player(this, playerPosition.x, playerPosition.y, 0);
 
     }
+
     loadAudios() {
     
     }
