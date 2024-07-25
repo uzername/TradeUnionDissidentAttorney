@@ -1,7 +1,7 @@
 class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, health = 10) {
         super(scene, x, y, "attorney");
-        this.setOrigin(0.5);
+        this.setOrigin(0.5, 1);
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.cursor = this.scene.input.keyboard.createCursorKeys();
@@ -13,11 +13,15 @@ class Player extends Phaser.GameObjects.Sprite {
         );
         this.right = true;
         this.body.setGravityY(100);
-        this.body.setSize(48, 60);
+        this.body.setSize(32, 55);
+        this.body.setOffset(16, -4);
         this.init();
+
         this.jumping = false;
         this.falling = false;
         this.shooting = false;
+        this.crouching = false;
+
         this.walkVelocity = 200;
         this.jumpVelocity = -400;
         this.invincible = false;
@@ -27,8 +31,16 @@ class Player extends Phaser.GameObjects.Sprite {
         this.A = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.S = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.D = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-    }
 
+        this.E = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+    }
+    /*
+    well this is complicated. A callback called from here but uses game.js context
+    */
+    assignInteractCallback(in_InteractCallback, in_contextOfScene) {
+        this.InteractCallback = in_InteractCallback;
+        this.contextOfScene = in_contextOfScene;
+    }
     /*
     Inits the animations for the player: init, idle, walk, jump, death, etc... and it adds a listener for the `animationcomplete` event.
     */
@@ -87,8 +99,7 @@ class Player extends Phaser.GameObjects.Sprite {
                 start: 0,
                 end: 6,
             }),
-            frameRate: 10,
-            repeat: 2,
+            frameRate: 3,
         });
         /*
         this.scene.anims.create({
@@ -109,6 +120,7 @@ class Player extends Phaser.GameObjects.Sprite {
       In the update function, we set the player movement according to the controls. We check if the player is jumping, falling, walking, etc...
       */
     update() {
+        
         if (this.dead) return;
         if (this.jumping) {
             if (this.body.velocity.y >= 0) {
@@ -138,7 +150,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.flipX = this.body.velocity.x < 0;
             this.body.setVelocityX(this.walkVelocity);
         } else if (this.cursor.left.isDown || this.A.isDown) {
-            this.shooti false;
+            this.shooting= false;
             if (this.body.blocked.down) {
                 this.anims.play("playerwalk", true);
             }
@@ -160,13 +172,14 @@ class Player extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(0);
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.spaceBar)) this.hammerBlow();
+        if (Phaser.Input.Keyboard.JustDown(this.spaceBar)) this.performCombat();
 
-        if (
-            Phaser.Input.Keyboard.JustDown(this.cursor.down) ||
-            Phaser.Input.Keyboard.JustDown(this.S)
-        )
-            this.buildBlock();
+        if (Phaser.Input.Keyboard.JustDown(this.cursor.down) || Phaser.Input.Keyboard.JustDown(this.S)) {
+            this.crouching = true;
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.E)) {
+            this.InteractCallback(this.contextOfScene);
+        }
     }
 
     /*
@@ -214,16 +227,13 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     /*
-      This is called when the player creates a blow to destroy something.
+      This is called when the player performs action - shooting for example.
       */
-    hammerBlow() {
+    performCombat() {
+        if (this.shooting) return;
         this.shooting = true;
-        this.anims.play("playerhammer", true);
-        const offsetX = this.right ? 32 : -32;
-        const size = this.mjolnir ? 128 : 32;
-        this.scene.blows.add(
-            new Blow(this.scene, this.x + offsetX, this.y, size, size)
-        );
+        this.anims.play("playershoot", true);
+        
     }
 
     /*
@@ -234,14 +244,14 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     /*
-      This is called when the player finishes an animation. It checks if the animation is the `playerground`, `playerhammer` or `playerbuild` and it plays the idle animation.
+      This is called when the player finishes an animation. It checks if the animation is the `playerground`, `playershoot` or ... and it plays the idle animation.
       */
     animationComplete(animation, frame) {
         if (animation.key === "playerground") {
             this.anims.play("playeridle", true);
         }
 
-        if (animation.key === "playerhammer" || animation.key === "playerbuild") {
+        if (animation.key === "playershoot") {
             this.shooting = false;
             this.anims.play(this.jumping ? "playerjump" : "playeridle", true);
         }
