@@ -28,7 +28,7 @@ export default class bootloader extends Phaser.Scene {
             },
             this
         );
-
+        // PLAYER
         // 6 images
         this.load.spritesheet("attorney_idle", "assets/sprites/attorney_idle.png", {
             frameWidth: 64,
@@ -56,6 +56,17 @@ export default class bootloader extends Phaser.Scene {
         });
         // 8 images
         this.load.spritesheet("attorney_walk", "assets/sprites/attorney_walk.png", {
+            frameWidth: 64,
+            frameHeight: 64,
+        });
+        // NPC BOSS
+        // 5 images
+        this.load.spritesheet("Boss_IdleSitting", "assets/sprites/Boss_IdleSitting.png", {
+            frameWidth: 64,
+            frameHeight: 64,
+        });
+        // 4 images
+        this.load.spritesheet("Boss_TalkSitting", "assets/sprites/Boss_TalkSitting.png", {
             frameWidth: 64,
             frameHeight: 64,
         });

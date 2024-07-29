@@ -1,6 +1,7 @@
 import Passage from "../passage";
 import Player from "../player";
 import Phaser from "phaser";
+import NPC_Boss from "../characters/NPC_Boss";
 export default class Game extends Phaser.Scene {
     constructor() {
         super({ key: "game" });
@@ -20,7 +21,7 @@ export default class Game extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 20920 * 2, 20080 * 2);
         this.physics.world.setBounds(0, 0, 20920 * 2, 20080 * 2);
         this.addPlayer();
-        this.cameras.main.startFollow(this.player, true, 0.05, 0.05, 0, 0);        
+        this.cameras.main.startFollow(this.player, true, 1, 0.05, 0, 0);        
         this.physics.world.enable([this.player]);
         //this.addScore();
         this.loadAudios();
@@ -61,14 +62,25 @@ export default class Game extends Phaser.Scene {
         this.objectsLayer = this.tileMap.getObjectLayer("objects");
         this.turnGroup = this.add.group();
         this.passageGroup = this.add.group();
+        this.FriendsGroup = this.add.group();
         this.addFunctionalObjects();
+        this.addColliders();
     }
     addFunctionalObjects() {
         this.objectsLayer.objects.forEach((object) => {
-            if (object.name === "turn") {
+            if (object.name.startsWith("NPC")) {
+                var facing = "left";
+                var facing_v = object.properties[0].value;
+                if (facing_v != null) {
+                    facing = facing_v;
+                }
+                if (object.name === "NPC_Boss") {                    
+                    var NPC_BossInst = new NPC_Boss(this, object.x, object.y, facing);
+                    this.FriendsGroup.add(NPC_BossInst);
+                }
+            } else if (object.name === "turn") {
                 this.turnGroup.add(new Turn(this, object.x, object.y));
             } else if (object.name === "passage") {
-                console.log(object);
                 // TODO add checks here!
                 var dest = object.properties[0].value;
                 var destX = -777;
@@ -82,6 +94,12 @@ export default class Game extends Phaser.Scene {
                 
             }
         });
+    }
+    /*
+    * add coliders between various other entities - friends and enemies
+    */
+    addColliders() {
+        this.physics.add.collider(this.FriendsGroup, this.platformLayer);
     }
     /*
    We add the player to the game and we add the colliders between the player and the rest of the elements. The starting position of the player is defined on the tilemap.
@@ -104,7 +122,7 @@ export default class Game extends Phaser.Scene {
     invoked from player js as callback (because keys are handled within player js). thisthis is a game.js object but 'this' will be a player
     */
     playerInteractsWithScene(thisthis) {
-        console.log(thisthis);
+        //console.log(thisthis);
         thisthis.physics.overlap(thisthis.player, thisthis.passageGroup, thisthis.passagePlayer);
     }
     /*
