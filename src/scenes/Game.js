@@ -2,6 +2,8 @@ import Passage from "../passage";
 import Player from "../player";
 import Phaser from "phaser";
 import NPC_Boss from "../characters/NPC_Boss";
+import MyCollider from "../MyCollider";
+import NPC_Secretary from "../characters/NPC_Secretary";
 export default class Game extends Phaser.Scene {
     constructor() {
         super({ key: "game" });
@@ -54,14 +56,18 @@ export default class Game extends Phaser.Scene {
             "stairs",
             this.tileSet
         );
-        
+        /*
         this.platformLayer.setCollisionByProperty({
             collide: true
         });
         this.platformLayer.setCollisionByExclusion([-1]);
+        */
         this.objectsLayer = this.tileMap.getObjectLayer("objects");
+        this.colliderLayer = this.tileMap.getObjectLayer("colliders");
         this.turnGroup = this.add.group();
         this.passageGroup = this.add.group();
+        this.collidersGroup = this.add.group();
+
         this.FriendsGroup = this.add.group();
         this.addFunctionalObjects();
         this.addColliders();
@@ -74,9 +80,12 @@ export default class Game extends Phaser.Scene {
                 if (facing_v != null) {
                     facing = facing_v;
                 }
-                if (object.name === "NPC_Boss") {                    
+                if (object.name === "NPC_Boss") {
                     var NPC_BossInst = new NPC_Boss(this, object.x, object.y, facing);
                     this.FriendsGroup.add(NPC_BossInst);
+                } else if (object.name === "NPC_Secretary") {
+                    var NPC_SecretaryInst = new NPC_Secretary(this, object.x, object.y, facing);
+                    this.FriendsGroup.add(NPC_SecretaryInst);
                 }
             } else if (object.name === "turn") {
                 this.turnGroup.add(new Turn(this, object.x, object.y));
@@ -99,7 +108,10 @@ export default class Game extends Phaser.Scene {
     * add coliders between various other entities - friends and enemies
     */
     addColliders() {
-        this.physics.add.collider(this.FriendsGroup, this.platformLayer);
+        this.colliderLayer.objects.forEach((object) => {
+            this.collidersGroup.add(new MyCollider(this, object.x, object.y, object.width, object.height));
+        });
+        this.physics.add.collider(this.FriendsGroup, this.collidersGroup);
     }
     /*
    We add the player to the game and we add the colliders between the player and the rest of the elements. The starting position of the player is defined on the tilemap.
@@ -112,17 +124,22 @@ export default class Game extends Phaser.Scene {
         );
         this.player = new Player(this, playerPosition.x, playerPosition.y, 0);
         this.player.assignInteractCallback(this.playerInteractsWithScene, this);
+        /*
         this.physics.add.collider(this.player, this.platformLayer, this.hitFloor,
             () => {
                 return true;
             },
             this);
+            */
+        this.physics.add.collider(this.player, this.collidersGroup);
     }
     /*
+    This should be when player presses use key (E)
     invoked from player js as callback (because keys are handled within player js). thisthis is a game.js object but 'this' will be a player
     */
     playerInteractsWithScene(thisthis) {
-        //console.log(thisthis);
+        // talks to NPC
+        // use passage
         thisthis.physics.overlap(thisthis.player, thisthis.passageGroup, thisthis.passagePlayer);
     }
     /*
@@ -130,8 +147,6 @@ export default class Game extends Phaser.Scene {
     */
     passagePlayer(playerObject, passageObject) {
         if (passageObject != null) {
-            console.log("passage:");
-            console.log(passageObject);
             playerObject.x = passageObject.destinationX;
             playerObject.y = passageObject.destinationY;
         }

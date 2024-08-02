@@ -70,7 +70,11 @@ export default class bootloader extends Phaser.Scene {
             frameWidth: 64,
             frameHeight: 64,
         });
-
+        // NPC SECRETARY
+        this.load.spritesheet("Secretary_IdleStanding", "assets/sprites/Secretary_IdleStanding.png", {
+            frameWidth: 64,
+            frameHeight: 64,
+        });
         this.load.spritesheet("dungeoncastle", "assets/images/dungeoncastle.png", { frameWidth: 32, frameHeight: 32 });
         this.load.spritesheet("officetiles", "assets/images/officetiles.png", { frameWidth: 32, frameHeight: 32 });
         this.load.tilemapTiledJSON(`sceneoffice`, `assets/maps/office.json`);

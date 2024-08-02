@@ -1,7 +1,7 @@
 class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, health = 10) {
         super(scene, x, y, "attorney");
-        this.setOrigin(0.5, 1);
+        this.setOrigin(1, 1);
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
         this.cursor = this.scene.input.keyboard.createCursorKeys();
@@ -14,7 +14,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.right = true;
         this.body.setGravityY(100);
         this.body.setSize(32, 55);
-        this.body.setOffset(16, -4);
+        this.body.setOffset(16, 8);
         this.init();
 
         this.jumping = false;
@@ -22,16 +22,18 @@ class Player extends Phaser.GameObjects.Sprite {
         this.shooting = false;
         this.crouching = false;
 
-        this.walkVelocity = 200;
+        this.walkVelocity = 150;
+        this.runVelocity = 250;
         this.jumpVelocity = -400;
         this.invincible = false;
         this.health = health;
         this.dead = false;
+        // movement
         this.W = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.A = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.S = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.D = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-
+        // use
         this.E = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     }
     /*
@@ -128,7 +130,7 @@ class Player extends Phaser.GameObjects.Sprite {
                 this.falling = true;
             }
         }
-
+        
         if (
             (Phaser.Input.Keyboard.JustDown(this.cursor.up) ||
                 Phaser.Input.Keyboard.JustDown(this.W)) &&
@@ -142,21 +144,45 @@ class Player extends Phaser.GameObjects.Sprite {
             this.jumping = true;
             //this.jumpSmoke();
         } else if (this.cursor.right.isDown || this.D.isDown) {
+            var isRunning = false;
+            if ((this.cursor.right.shiftKey)|| (this.D.shiftKey)) {
+                isRunning = true;
+            }
             this.shooting = false;
             if (this.body.blocked.down) {
-                this.anims.play("playerwalk", true);
+                if (isRunning) {
+                    this.anims.play("playerrun", true);
+                } else {
+                    this.anims.play("playerwalk", true);
+                }
             }
             this.right = true;
             this.flipX = this.body.velocity.x < 0;
-            this.body.setVelocityX(this.walkVelocity);
+            if (isRunning) {
+                this.body.setVelocityX(this.runVelocity);
+            } else {
+                this.body.setVelocityX(this.walkVelocity);
+            }
         } else if (this.cursor.left.isDown || this.A.isDown) {
-            this.shooting= false;
+            this.shooting = false;
+            var isRunning = false;
+            if ((this.cursor.left.shiftKey)|| (this.A.shiftKey)) {
+                isRunning = true;
+            }
             if (this.body.blocked.down) {
-                this.anims.play("playerwalk", true);
+                if (isRunning) {
+                    this.anims.play("playerrun", true);
+                } else {
+                    this.anims.play("playerwalk", true);
+                }
             }
             this.right = false;
             this.flipX = true;
-            this.body.setVelocityX(-this.walkVelocity);
+            if (isRunning) {
+                this.body.setVelocityX(-this.runVelocity);
+            } else {
+                this.body.setVelocityX(-this.walkVelocity);
+            }
         } else {
             if (this.body.blocked.down) {
                 if (this.jumping) {
