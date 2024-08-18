@@ -13,7 +13,7 @@ export default class DialogManagerPlugin extends Phaser.Plugins.ScenePlugin {
 * participant of dialog - player or any NPC
 * id, name, context are the properties
 */
-export class dialogActor {
+export class DialogActor {
     constructor(in_id, in_Name) {
         this.id = in_id;
         this.name = in_Name;
@@ -29,7 +29,7 @@ export class dialogActor {
 /*
 * represents answer to dialog statement - player chooses it from list
 */
-export class dialogAnswer {
+export class DialogAnswer {
     /**
      * 
      * @param {int} in_id - ID of this answer for dialog
@@ -47,7 +47,7 @@ export class dialogAnswer {
 /*
 * a single statement made by actor (NPC or player if it is monologue) as well as set of options for it
 */
-export class dialogStatement {
+export class DialogStatement {
     /**
      * 
      * @param {int} in_id - ID of this dialog statement
@@ -60,6 +60,13 @@ export class dialogStatement {
         this.listAnswers = in_listAnswers;
     }
 }
-export class dialogCompleteStructure {
-
+export class DialogCompleteStructure {
+    constructor() {
+        this.listActors = [];
+        this.listStatements = [];
+    }
+    constructor(in_listActors, in_listStatements) {
+        this.listActors = in_listActors;
+        this.listStatements = in_listStatements;
+    }
 }
