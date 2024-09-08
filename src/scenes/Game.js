@@ -4,6 +4,7 @@ import Phaser from "phaser";
 import NPC_Boss from "../characters/NPC_Boss";
 import MyCollider from "../MyCollider";
 import NPC_Secretary from "../characters/NPC_Secretary";
+import DialogConfig from "../dialogsystem/dialog_config"
 export default class Game extends Phaser.Scene {
     constructor() {
         super({ key: "game" });
@@ -26,6 +27,11 @@ export default class Game extends Phaser.Scene {
         this.cameras.main.startFollow(this.player, true, 1, 0.05, 0, 0);        
         this.physics.world.enable([this.player]);
         //this.addScore();
+
+        this.currentDialogSetting = new DialogConfig();
+        console.log(this.MyDialogManagerInst);
+        this.MyDialogManagerInst.MyInit(this.currentDialogSetting);
+
         this.loadAudios();
         this.playMusic();
     }
@@ -138,9 +144,9 @@ export default class Game extends Phaser.Scene {
     invoked from player js as callback (because keys are handled within player js). thisthis is a game.js object but 'this' will be a player
     */
     playerInteractsWithScene(thisthis) {
-        // talks to NPC
         // use passage
         thisthis.physics.overlap(thisthis.player, thisthis.passageGroup, thisthis.passagePlayer);
+        // talks to NPC
     }
     /*
     when player uses passage

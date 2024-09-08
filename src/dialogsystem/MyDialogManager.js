@@ -2,9 +2,26 @@
 export default class DialogManagerPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
-        
+        console.log("created Dialog Manager");
     }
-    // setup config
+    MyInit(in_data) {
+        console.log("init of Dialog Manager");
+        this.setupUI();
+        this.setupParameters(in_data);
+    }
+    setupUI() {
+        this.dialogId = "div-dialog"
+        var dialogElement = document.getElementById("div-dialog");
+        if (dialogElement != null) {
+            this.dialogDiv = dialogElement;
+        } else {
+            this.dialogDiv = document.createElement('div');
+            this.dialogDiv.id = this.dialogId;
+            this.dialogDiv.style.display = "none";
+            this.scene.game.canvas.appendChild(this.dialogDiv)
+        }
+    }
+    // setup config - actors, answers and such
     setupParameters(in_parameterObject) {
         this.parameterObject = in_parameterObject;
     }
@@ -61,10 +78,6 @@ export class DialogStatement {
     }
 }
 export class DialogCompleteStructure {
-    constructor() {
-        this.listActors = [];
-        this.listStatements = [];
-    }
     constructor(in_listActors, in_listStatements) {
         this.listActors = in_listActors;
         this.listStatements = in_listStatements;
