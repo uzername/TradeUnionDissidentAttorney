@@ -30,7 +30,8 @@ export default class Game extends Phaser.Scene {
 
         this.currentDialogSetting = new DialogConfig();
         console.log(this.MyDialogManagerInst);
-        this.MyDialogManagerInst.MyInit(this.currentDialogSetting);
+        var game_topmostcontainer = document.getElementById("game-container");
+        this.MyDialogManagerInst.MyInit(game_topmostcontainer,this.currentDialogSetting);
 
         this.loadAudios();
         this.playMusic();
@@ -147,6 +148,14 @@ export default class Game extends Phaser.Scene {
         // use passage
         thisthis.physics.overlap(thisthis.player, thisthis.passageGroup, thisthis.passagePlayer);
         // talks to NPC
+        thisthis.physics.overlap(thisthis.player, thisthis.FriendsGroup, thisthis.talkPlayer);
+    }
+
+    talkPlayer(playerObject, NPCObject) {
+        if (NPCObject != null) {
+            console.log("talk to: ");
+            console.log(NPCObject);
+        }
     }
     /*
     when player uses passage

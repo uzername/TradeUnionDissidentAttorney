@@ -4,12 +4,12 @@ export default class DialogManagerPlugin extends Phaser.Plugins.ScenePlugin {
         super(scene, pluginManager);
         console.log("created Dialog Manager");
     }
-    MyInit(in_data) {
+    MyInit(in_parentElement,in_data) {
         console.log("init of Dialog Manager");
-        this.setupUI();
+        this.setupUI(in_parentElement);
         this.setupParameters(in_data);
     }
-    setupUI() {
+    setupUI(parentElement) {
         this.dialogId = "div-dialog"
         var dialogElement = document.getElementById("div-dialog");
         if (dialogElement != null) {
@@ -18,7 +18,8 @@ export default class DialogManagerPlugin extends Phaser.Plugins.ScenePlugin {
             this.dialogDiv = document.createElement('div');
             this.dialogDiv.id = this.dialogId;
             this.dialogDiv.style.display = "none";
-            this.scene.game.canvas.appendChild(this.dialogDiv)
+            /*this.scene.game.canvas*/
+            parentElement.appendChild(this.dialogDiv)
         }
     }
     // setup config - actors, answers and such
