@@ -18,7 +18,6 @@ export default class DialogManagerPlugin extends Phaser.Plugins.ScenePlugin {
             this.dialogDiv = document.createElement('div');
             this.dialogDiv.id = this.dialogId;
             this.dialogDiv.style.display = "none";
-            /*this.scene.game.canvas*/
             parentElement.appendChild(this.dialogDiv)
         }
     }
@@ -35,6 +34,9 @@ export class DialogActor {
     constructor(in_id, in_Name) {
         this.id = in_id;
         this.name = in_Name;
+        // what is a quest main character performs with this NPC. Dialog resolving depends on it. 
+        // it's like - character's memory about player's actions. Keep in mind that it relates to player as well. How odd
+        this.questStage = "NONE";
     }
     /**
      * setup context related to this actor - any other data that may be used for dialog resolving
@@ -52,14 +54,10 @@ export class DialogAnswer {
      * 
      * @param {int} in_id - ID of this answer for dialog
      * @param {string} in_stringToDisplay - how this answer will be shown in list
-     * @param {function} in_processFunction - a function that will be called to get ID of next dialog statement. 
-     * In general it may consist of single return but in more complicated variants it may utilize context of actors. 
-     * It uses current dialog answer id and optionally contexts - of player and actor - and returns next id of statement
      */
-    constructor(in_id, in_stringToDisplay, in_processFunction) {
+    constructor(in_id, in_stringToDisplay) {
         this.id = in_id
         this.stringToDisplay = in_stringToDisplay
-        this.processFunction = in_processFunction
     }
 }
 /*

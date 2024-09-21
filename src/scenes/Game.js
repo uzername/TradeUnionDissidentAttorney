@@ -153,8 +153,9 @@ export default class Game extends Phaser.Scene {
 
     talkPlayer(playerObject, NPCObject) {
         if (NPCObject != null) {
-            console.log("talk to: ");
-            console.log(NPCObject);
+            //console.log("talk to: ");
+            //console.log(NPCObject);
+
         }
     }
     /*
