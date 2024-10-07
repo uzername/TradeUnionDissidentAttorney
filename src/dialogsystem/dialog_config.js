@@ -4,6 +4,8 @@ export default class DialogConfig {
     constructor() {
         var dialogActors = [new DialogActor("1", "Attorney"), new DialogActor("2", "NPC_Boss"), new DialogActor(3, "NPC_Secretary")];
         this.currentPlayer = null;
+        this.playerDialogActorIndex = 0;
+        this.npcDialogActorIndex = null;
         this.currentNPC = null;
         var dialogStatements = [
             // secretary dialogs
@@ -26,14 +28,29 @@ export default class DialogConfig {
         this.dialogData = new DialogCompleteStructure(dialogActors, dialogStatements);
     }
     // used to resolve beginning of dialog. Essentially an entry point of dialog manager
-    findFirstStatement(playerGameObj, NPCgameObj, chosenDialogStatementIndx) {
+    findFirstStatement(playerGameObj, NPCgameObj) {
         this.currentNPC = NPCgameObj;
         this.currentPlayer = playerGameObj;
+        this.npcDialogActorIndex = this.findDialogActorIndexByName(NPCgameObj.name);
         if (NPCgameObj.name == "NPC_Secretary") {
             if (chosenDialogStatementIndx == null) {
                 return 1;
             }
         }
+    }
+    findDialogActorIndexByName(in_Name) {
+        if (this.dialogData == null) {
+            throw new Exception("this.dialogData was not initialized in DialogConfig");
+            return;
+        }
+        var retIndex = -1;
+        for (var actorActor in this.dialogData.listActors) {
+            retIndex++;
+            if (actorActor.name == in_Name) {
+                return retIndex;
+            }
+        }
+        return -1;
     }
     // used to choose next statement. Called when player chooses some dialog option
     // returns next statement
