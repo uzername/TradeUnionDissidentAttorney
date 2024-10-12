@@ -46,4 +46,11 @@ export default class NPC_Boss extends Phaser.Physics.Arcade.Sprite {
             this.anims.play("NPC_Boss_IdleSitting", true);
         }
     }
+
+    getTalkStatement() {
+        return "Helo, I am Boss";
+    }
+    getTalkOptions() {
+        return ["Yes, okay", "No way!", "All right, I just leave"];
+    }
 }

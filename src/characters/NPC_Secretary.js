@@ -38,4 +38,10 @@ export default class NPC_Secretary extends Phaser.Physics.Arcade.Sprite {
     animationComplete(animation, frame) {
         
     }
+    getTalkStatement() {
+        return "Helo, I am Boss";
+    }
+    getTalkOptions() {
+        return ["Yes, okay", "No way!", "All right, I just leave"];
+    }
 }

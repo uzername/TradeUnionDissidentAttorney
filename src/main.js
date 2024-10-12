@@ -5,7 +5,7 @@ import Splash from "./scenes/splash";
 import Game from "./scenes/game";
 import splash_credits from "./scenes/splash_credits";
 
-import MyDialogManager from "./dialogsystem/MyDialogManager"
+import DialogManagerPlugin2 from "./dialogsystem2/MyDialogManager2"
 
 
 
@@ -33,7 +33,7 @@ const config = {
     scene: [Bootloader, Splash, splash_credits, Game, Outro],
     plugins: {
         // https://newdocs.phaser.io/docs/3.80.0/Phaser.Types.Core.PluginObjectItem
-        scene: [{ key: "MyDialogManager", plugin: MyDialogManager, sceneKey: "MyDialogManagerInst", mapping: "MyDialogManagerInst" }]
+        scene: [{ key: "MyDialogManagerPlugin2", plugin: DialogManagerPlugin2, sceneKey: "MyDialogManagerPlugin2Inst", mapping: "MyDialogManagerPlugin2Inst" }]
     }
     };
 

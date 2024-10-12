@@ -4,7 +4,7 @@ import Phaser from "phaser";
 import NPC_Boss from "../characters/NPC_Boss";
 import MyCollider from "../MyCollider";
 import NPC_Secretary from "../characters/NPC_Secretary";
-import DialogConfig from "../dialogsystem/dialog_config"
+//import DialogConfig from "../dialogsystem/dialog_config"
 export default class Game extends Phaser.Scene {
     constructor() {
         super({ key: "game" });
@@ -28,10 +28,10 @@ export default class Game extends Phaser.Scene {
         this.physics.world.enable([this.player]);
         //this.addScore();
 
-        this.currentDialogSetting = new DialogConfig();
-        console.log(this.MyDialogManagerInst);
-        var game_topmostcontainer = document.getElementById("game-container");
-        this.MyDialogManagerInst.MyInit(game_topmostcontainer,this.currentDialogSetting);
+        //this.currentDialogSetting = new DialogConfig();
+        console.log(this.MyDialogManager2Inst);
+        var game_topmostcontainer = document.getElementById("app");
+        this.MyDialogManagerPlugin2Inst.MyInit(game_topmostcontainer);
 
         this.loadAudios();
         this.playMusic();
@@ -148,14 +148,18 @@ export default class Game extends Phaser.Scene {
         // use passage
         thisthis.physics.overlap(thisthis.player, thisthis.passageGroup, thisthis.passagePlayer);
         // talks to NPC
-        thisthis.physics.overlap(thisthis.player, thisthis.FriendsGroup, thisthis.talkPlayer);
+        thisthis.physics.overlap(thisthis.player, thisthis.FriendsGroup, thisthis.talkPlayer,null, thisthis);
     }
 
     talkPlayer(playerObject, NPCObject) {
         if (NPCObject != null) {
-            //console.log("talk to: ");
-            //console.log(NPCObject);
+            console.log("talk to: ");
+            console.log(NPCObject);
+            var NPCTalkStatement = NPCObject.getTalkStatement();
+            var NPCTalkVariants = NPCObject.getTalkOptions();
+            
 
+            this.MyDialogManagerPlugin2Inst.InitiateTalk(NPCTalkStatement, NPCTalkVariants);
         }
     }
     /*
