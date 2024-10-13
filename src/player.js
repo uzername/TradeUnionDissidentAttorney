@@ -37,7 +37,8 @@ class Player extends Phaser.GameObjects.Sprite {
         this.E = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     }
     /*
-    well this is complicated. A callback called from here but uses game.js context
+    well this is complicated. A callback (in_InteractCallback - for interaction with scene) called from player.js but uses game.js context
+    probably I should think about dependency injection at this point
     */
     assignInteractCallback(in_InteractCallback, in_contextOfScene) {
         this.InteractCallback = in_InteractCallback;
@@ -204,6 +205,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.crouching = true;
         }
         if (Phaser.Input.Keyboard.JustDown(this.E)) {
+            console.log(this.contextOfScene.MyDialogManagerPlugin2Inst.wasDialogOpened);
             this.InteractCallback(this.contextOfScene);
         }
     }

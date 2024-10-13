@@ -158,8 +158,11 @@ export default class Game extends Phaser.Scene {
             var NPCTalkStatement = NPCObject.getTalkStatement();
             var NPCTalkVariants = NPCObject.getTalkOptions();
             
-
-            this.MyDialogManagerPlugin2Inst.InitiateTalk(NPCTalkStatement, NPCTalkVariants);
+            if (this.MyDialogManagerPlugin2Inst.wasDialogOpened == false) {
+                this.MyDialogManagerPlugin2Inst.InitiateTalk(NPCTalkStatement, NPCTalkVariants);
+            } else {
+                this.MyDialogManagerPlugin2Inst.UnInitiateTalk()
+            }
         }
     }
     /*

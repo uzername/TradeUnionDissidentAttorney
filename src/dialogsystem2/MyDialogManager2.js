@@ -2,6 +2,7 @@
 export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
+        this.wasDialogOpened = false;
         console.log("created Dialog Manager 2");
     }
     MyInit(in_parentElement) {
@@ -18,6 +19,10 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
             this.dialogDiv.id = this.dialogId;
             this.dialogDiv.style.display = "none";
             this.dialogDiv.style.position = "absolute";
+            this.dialogDiv.style.bottom = "0px";
+            this.dialogDiv.style.border = "thick solid goldenrod"
+            this.dialogDiv.style.padding = "2px";
+            this.dialogDiv.style.backgroundColor = "black";
             parentElement.appendChild(this.dialogDiv)
         }
     }
@@ -39,8 +44,14 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
         this.dialogDiv.style.width = geometryConfigObject.CanvasWidth;
         this.dialogDiv.style.height = "50%";
         this.dialogDiv.style.left = geometryConfigObject.marginLeft + "px";
-        this.dialogDiv.style.bottom = "0px";
-        this.dialogDiv.style.borderColor = "goldenrod";
+        this.wasDialogOpened = true;
         //console.log(NPCTalkStatement, NPCTalkVariants, geometryConfigObject);
+    }
+    /**
+     * close chat window
+     */
+    UnInitiateTalk() {
+        this.dialogDiv.style.display = "none";
+        this.wasDialogOpened = false;
     }
 }
