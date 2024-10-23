@@ -11,6 +11,8 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
     }
     setupUI(parentElement) {
         this.dialogId = "div-dialog"
+        this.dialogId_action = "div-dialog-action";
+        this.dialogClass_option = "div-dialog-option"
         var dialogElement = document.getElementById("div-dialog");
         if (dialogElement != null) {
             this.dialogDiv = dialogElement;
@@ -44,13 +46,18 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
         this.dialogDiv.style.width = geometryConfigObject.CanvasWidth;
         this.dialogDiv.style.height = "50%";
         this.dialogDiv.style.left = geometryConfigObject.marginLeft + "px";
+        var dialogDivStatement = document.createElement('div');
+        dialogDivStatement.style.width = "100%";
+        dialogDivStatement.textContent = "%CHARACTER% says:";
         this.wasDialogOpened = true;
         //console.log(NPCTalkStatement, NPCTalkVariants, geometryConfigObject);
+        
     }
     /**
      * close chat window
      */
     UnInitiateTalk() {
+        this.dialogDiv.innerHTML = '';
         this.dialogDiv.style.display = "none";
         this.wasDialogOpened = false;
     }
