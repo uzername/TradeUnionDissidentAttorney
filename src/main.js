@@ -6,8 +6,9 @@ import Game from "./scenes/game";
 import splash_credits from "./scenes/splash_credits";
 
 import DialogManagerPlugin2 from "./dialogsystem2/MyDialogManager2"
+import StringsTraslation from "./strings.js"
 
-
+var initializedStrings = new StringsTraslation();
 
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig

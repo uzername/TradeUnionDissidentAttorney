@@ -131,12 +131,12 @@ class Player extends Phaser.GameObjects.Sprite {
                 this.falling = true;
             }
         }
-        
+        // key handling goes next . By now I check opened dialog window
+
         if (
             (Phaser.Input.Keyboard.JustDown(this.cursor.up) ||
-                Phaser.Input.Keyboard.JustDown(this.W)) &&
-            this.body.blocked.down
-        ) {
+                Phaser.Input.Keyboard.JustDown(this.W)) && this.body.blocked.down) {
+            if ((this.scene.MyDialogManagerPlugin2Inst != null) && (this.scene.MyDialogManagerPlugin2Inst.wasDialogOpened)) { return; }
             this.shooting = false;
             this.body.setVelocityY(this.jumpVelocity);
             this.body.setGravityY(400);
@@ -145,6 +145,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.jumping = true;
             //this.jumpSmoke();
         } else if (this.cursor.right.isDown || this.D.isDown) {
+            if ((this.scene.MyDialogManagerPlugin2Inst != null) && (this.scene.MyDialogManagerPlugin2Inst.wasDialogOpened)) { return; }
             var isRunning = false;
             if ((this.cursor.right.shiftKey)|| (this.D.shiftKey)) {
                 isRunning = true;
@@ -165,6 +166,7 @@ class Player extends Phaser.GameObjects.Sprite {
                 this.body.setVelocityX(this.walkVelocity);
             }
         } else if (this.cursor.left.isDown || this.A.isDown) {
+            if ((this.scene.MyDialogManagerPlugin2Inst != null) && (this.scene.MyDialogManagerPlugin2Inst.wasDialogOpened)) { return; }
             this.shooting = false;
             var isRunning = false;
             if ((this.cursor.left.shiftKey)|| (this.A.shiftKey)) {
@@ -199,13 +201,16 @@ class Player extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(0);
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.spaceBar)) this.performCombat();
+        if (Phaser.Input.Keyboard.JustDown(this.spaceBar)) {
+            if ((this.scene.MyDialogManagerPlugin2Inst != null) && (this.scene.MyDialogManagerPlugin2Inst.wasDialogOpened)) { return; }
+            this.performCombat();
+        }
 
         if (Phaser.Input.Keyboard.JustDown(this.cursor.down) || Phaser.Input.Keyboard.JustDown(this.S)) {
+            if ((this.scene.MyDialogManagerPlugin2Inst != null) && (this.scene.MyDialogManagerPlugin2Inst.wasDialogOpened)) { return; }
             this.crouching = true;
         }
         if (Phaser.Input.Keyboard.JustDown(this.E)) {
-            console.log(this.contextOfScene.MyDialogManagerPlugin2Inst.wasDialogOpened);
             this.InteractCallback(this.contextOfScene);
         }
     }
