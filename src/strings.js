@@ -9,17 +9,20 @@ export default class StringsTraslation {
             'EN': {
                 'Attorney': 'Attorney',
                 'NPC_Secretary': 'Secretary',
-                'NPC_Boss': 'Boss'
+                'NPC_Boss': 'Boss',
+                'Reaction_say': 'says',
             },
             'RU': {
                 'Attorney': 'Адвокат',
                 'NPC_Secretary': 'Секретарь',
-                'NPC_Boss': 'Рукводитель'
+                'NPC_Boss': 'Рукводитель',
+                'Reaction_say': 'говорит',
             },
             'UA': {
                 'Attorney': 'Адвокат',
-                'NPC_Secretary': 'Секретарь',
-                'NPC_Boss': 'Рукводитель'
+                'NPC_Secretary': 'Секретар',
+                'NPC_Boss': 'Керівник',
+                'Reaction_say': 'каже',
             }
         }
     }

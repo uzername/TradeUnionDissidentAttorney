@@ -5,6 +5,8 @@ import NPC_Boss from "../characters/NPC_Boss";
 import MyCollider from "../MyCollider";
 import NPC_Secretary from "../characters/NPC_Secretary";
 //import DialogConfig from "../dialogsystem/dialog_config"
+import StringsTraslation from "./strings.js"
+
 export default class Game extends Phaser.Scene {
     constructor() {
         super({ key: "game" });
@@ -155,9 +157,10 @@ export default class Game extends Phaser.Scene {
         if (NPCObject != null) {
             console.log("talk to: ");
             console.log(NPCObject);
+            var initializedStrings = new StringsTraslation();
             var NPCTalkStatement = NPCObject.getTalkStatement();
             var NPCTalkVariants = NPCObject.getTalkOptions();
-            
+            var NPCName_Localized = initializedStrings[initializedStrings.currentLanguage][NPCObject.name];
             if (this.MyDialogManagerPlugin2Inst.wasDialogOpened == false) {
                 this.MyDialogManagerPlugin2Inst.InitiateTalk(NPCTalkStatement, NPCTalkVariants, NPCObject.name);
             } else {
