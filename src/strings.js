@@ -4,26 +4,28 @@ export default class StringsTraslation {
             return StringsTraslation._instance
         }
         StringsTraslation._instance = this;
-        this.currentLanguage = 'EN';
+        this.currentLanguage = "EN";
         this.lines = {
-            'EN': {
-                'Attorney': 'Attorney',
-                'NPC_Secretary': 'Secretary',
-                'NPC_Boss': 'Boss',
-                'Reaction_say': 'says',
+            "EN": {
+                "Attorney": "Attorney",
+                "NPC_Secretary": "Secretary",
+                "NPC_Boss": "Boss",
+                "Reaction_Say": "says",
             },
-            'RU': {
-                'Attorney': 'Адвокат',
-                'NPC_Secretary': 'Секретарь',
-                'NPC_Boss': 'Рукводитель',
-                'Reaction_say': 'говорит',
+            
+            "RU": {
+                "Attorney": "РђРґРІРѕРєР°С‚",
+                "NPC_Secretary": "РЎРµРєСЂРµС‚Р°СЂСЊ",
+                "NPC_Boss": "Р СѓРєРІРѕРґРёС‚РµР»СЊ",
+                "Reaction_Say": "РіРѕРІРѕСЂРёС‚",
             },
-            'UA': {
-                'Attorney': 'Адвокат',
-                'NPC_Secretary': 'Секретар',
-                'NPC_Boss': 'Керівник',
-                'Reaction_say': 'каже',
+            "UA": {
+                "Attorney": "РђРґРІРѕРєР°С‚",
+                "NPC_Secretary": "РЎРµРєСЂРµС‚Р°СЂ",
+                "NPC_Boss": "РљРµСЂС–РІРЅРёРє",
+                "Reaction_Say": "РєР°Р¶Рµ",
             }
+            
         }
     }
 }

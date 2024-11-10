@@ -48,9 +48,9 @@ export default class NPC_Boss extends Phaser.Physics.Arcade.Sprite {
     }
 
     getTalkStatement() {
-        return "Helo, I am Boss";
+        return "Hello, I am Boss";
     }
     getTalkOptions() {
-        return ["Yes, okay", "No way!", "All right, I just leave"];
+        return ["Understandable, have a good day", "Pleased to meet you", "All right, I just leave"];
     }
 }

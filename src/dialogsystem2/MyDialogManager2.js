@@ -51,7 +51,12 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
         var dialogDivStatement = document.createElement('div');
         dialogDivStatement.style.width = "100%";
         dialogDivStatement.textContent = NPCName + " says:";
+        var dialogDivStatement2 = document.createElement('div');
+        dialogDivStatement2.style.width = "100%";
+        dialogDivStatement2.textContent = NPCTalkStatement;
+
         this.dialogDiv.appendChild(dialogDivStatement);
+        this.dialogDiv.appendChild(dialogDivStatement2);
         this.wasDialogOpened = true;
         
         
