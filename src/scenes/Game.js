@@ -65,6 +65,10 @@ export default class Game extends Phaser.Scene {
             "stairs",
             this.tileSet
         );
+        this.frontdecorLayer = this.tileMap.createLayer(
+            "frontdecor",
+            this.tileSet
+        );
         /*
         this.platformLayer.setCollisionByProperty({
             collide: true
