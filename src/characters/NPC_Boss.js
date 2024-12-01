@@ -8,7 +8,6 @@ export default class NPC_Boss extends Phaser.Physics.Arcade.Sprite {
         this.body.setAllowGravity(true);
         this.scene.add.existing(this);
         this.direction = type === "right" ? 1 : -1;
-        console.log(this.direction);
         this.init();
     }
     /*

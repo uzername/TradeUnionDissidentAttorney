@@ -80,6 +80,7 @@ export default class bootloader extends Phaser.Scene {
         this.load.tilemapTiledJSON(`sceneoffice`, `assets/maps/office.json`);
 
         this.load.image("landscape", "assets/images/landscape_city37.png");
+        this.load.image('console1', 'assets/sprites/console_computer1.png');
         this.load.image("ui_frame", "assets/UI/drawing.png");
         this.load.image("ui_button1", "assets/UI/button1.png");
         this.load.image("ui_button2", "assets/UI/button2.png");

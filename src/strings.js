@@ -10,20 +10,26 @@ export default class StringsTraslation {
                 "Attorney": "Attorney",
                 "NPC_Secretary": "Secretary",
                 "NPC_Boss": "Boss",
+                "PROP_ConOffice": "Console in the office",
                 "Reaction_Say": "says",
+                "Reaction_Display": "shows",
             },
             
             "RU": {
                 "Attorney": "Адвокат",
                 "NPC_Secretary": "Секретарь",
                 "NPC_Boss": "Рукводитель",
+                "PROP_ConOffice": "Информационная станция в офисе",
                 "Reaction_Say": "говорит",
+                "Reaction_Display": "отображает",
             },
             "UA": {
                 "Attorney": "Адвокат",
                 "NPC_Secretary": "Секретар",
                 "NPC_Boss": "Керівник",
+                "PROP_ConOffice": "Інформаційна станція в офісі",
                 "Reaction_Say": "каже",
+                "Reaction_Display": "показує на екрані",
             }
             
         }

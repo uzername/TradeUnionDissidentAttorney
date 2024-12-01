@@ -6,6 +6,7 @@ import MyCollider from "../MyCollider";
 import NPC_Secretary from "../characters/NPC_Secretary";
 //import DialogConfig from "../dialogsystem/dialog_config"
 import StringsTraslation from "../strings.js"
+import PROP_ConOffice from "../props/PROP_ConOffice";
 
 export default class Game extends Phaser.Scene {
     constructor() {
@@ -87,7 +88,7 @@ export default class Game extends Phaser.Scene {
     }
     addFunctionalObjects() {
         this.objectsLayer.objects.forEach((object) => {
-            if (object.name.startsWith("NPC")) {
+            if (object.name.startsWith("NPC") || object.name.startsWith("PROP")) {
                 var facing = "left";
                 var facing_v = object.properties[0].value;
                 if (facing_v != null) {
@@ -99,6 +100,9 @@ export default class Game extends Phaser.Scene {
                 } else if (object.name === "NPC_Secretary") {
                     var NPC_SecretaryInst = new NPC_Secretary(this, object.x, object.y, facing);
                     this.FriendsGroup.add(NPC_SecretaryInst);
+                } else if (object.name === "PROP_ConOffice") {
+                    var PROP_ConOfficeInst = new PROP_ConOffice(this, object.x, object.y, facing);
+                    this.FriendsGroup.add(PROP_ConOfficeInst);
                 }
             } else if (object.name === "turn") {
                 this.turnGroup.add(new Turn(this, object.x, object.y));
