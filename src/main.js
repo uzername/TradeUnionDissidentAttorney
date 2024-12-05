@@ -3,10 +3,12 @@ import Bootloader from "./scenes/bootloader";
 import Outro from "./scenes/outro";
 import Splash from "./scenes/splash";
 import Game from "./scenes/game";
+import SettingsScene from "./scenes/settings";
 import splash_credits from "./scenes/splash_credits";
 
 import DialogManagerPlugin2 from "./dialogsystem2/MyDialogManager2"
 import StringsTraslation from "./strings.js"
+
 
 var initializedStrings = new StringsTraslation();
 
@@ -31,7 +33,7 @@ const config = {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
     autoRound: false,
-    scene: [Bootloader, Splash, splash_credits, Game, Outro],
+    scene: [Bootloader, Splash, splash_credits, SettingsScene, Game, Outro],
     plugins: {
         // https://newdocs.phaser.io/docs/3.80.0/Phaser.Types.Core.PluginObjectItem
         scene: [{ key: "MyDialogManagerPlugin2", plugin: DialogManagerPlugin2, sceneKey: "MyDialogManagerPlugin2Inst", mapping: "MyDialogManagerPlugin2Inst" }]

@@ -12,7 +12,7 @@ export default class StringsTraslation {
                 "NPC_Boss": "Boss",
                 "PROP_ConOffice": "Console in the office",
                 "Reaction_Say": "says",
-                "Reaction_Display": "shows",
+                "Reaction_Display": "shows on display",
             },
             
             "RU": {
@@ -21,7 +21,7 @@ export default class StringsTraslation {
                 "NPC_Boss": "Рукводитель",
                 "PROP_ConOffice": "Информационная станция в офисе",
                 "Reaction_Say": "говорит",
-                "Reaction_Display": "отображает",
+                "Reaction_Display": "отображает на экране",
             },
             "UA": {
                 "Attorney": "Адвокат",

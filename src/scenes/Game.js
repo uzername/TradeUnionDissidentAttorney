@@ -21,6 +21,7 @@ export default class Game extends Phaser.Scene {
         this.center_height = this.height / 2;
         this.cameras.main.setBackgroundColor(0x62a2bf); //(0x00b140)//(0x62a2bf)
         //this.add.tileSprite(0, 1000, 1024 * 10, 512, "landscape").setOrigin(0.5);
+        this.addBackground();
         this.createMap();
         this.cameras.main.zoom = 2;
         this.game.scale.setZoom(2);
@@ -35,7 +36,7 @@ export default class Game extends Phaser.Scene {
         console.log(this.MyDialogManager2Inst);
         var game_topmostcontainer = document.getElementById("app");
         this.MyDialogManagerPlugin2Inst.MyInit(game_topmostcontainer);
-
+        
         this.loadAudios();
         this.playMusic();
     }
@@ -121,6 +122,17 @@ export default class Game extends Phaser.Scene {
             }
         });
     }
+    /*
+    This is how we create an infinite background.We create a tileSprite with the
+    size of the screen and we set the origin to 0, 0. Then we set the scroll factor
+    to 0, 1 so it will scroll only in the Y axis.
+    */
+    addBackground() {
+    this.background = this.add
+        .tileSprite(0, 0, this.width, this.height, "landscape")
+        .setOrigin(0)
+        .setScrollFactor(0, 1);
+}
     /*
     * add coliders between various other entities - friends and enemies
     */

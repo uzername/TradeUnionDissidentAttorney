@@ -49,7 +49,7 @@ export default class splash extends Phaser.Scene {
             this.scene.start("splash_credits")
         })
         this.settingsButton.on('pointerdown', () => {
-            alert('I add some settings (like switching language) later maybe');
+            this.scene.start("SettingsScene")
         })
     }
 
