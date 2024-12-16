@@ -1,3 +1,4 @@
+import StringsTraslation from "../strings.js"
 export default class NPC_Boss extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, type = "right") {
         super(scene, x, y, "NPC_Boss");
@@ -51,5 +52,9 @@ export default class NPC_Boss extends Phaser.Physics.Arcade.Sprite {
     }
     getTalkOptions() {
         return ["Understandable, have a good day", "Pleased to meet you", "All right, I just leave"];
+    }
+    getTalkAction() {
+        var initializedStrings = new StringsTraslation();
+        return initializedStrings.lines[initializedStrings.currentLanguage]['Reaction_Say'];
     }
 }

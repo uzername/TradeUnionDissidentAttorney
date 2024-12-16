@@ -36,7 +36,7 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
      * @param {Array<String>} NPCTalkVariants  list of strings that indicate possible answers
      */
      
-    InitiateTalk(NPCTalkStatement, NPCTalkVariants, NPCName ) {
+    InitiateTalk(NPCTalkStatement, NPCTalkVariants, NPCName, NPCTalkAction ) {
         //an object with such fields: CanvasWidth, CanvasHeight, CanvasMarginLeft, CanvasMarginTop. I use it to calculate position of dialog.
         var geometryConfigObject = {
             CanvasWidth: this.game.canvas.style.width,
@@ -50,7 +50,7 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
         this.dialogDiv.style.left = geometryConfigObject.marginLeft + "px";
         var dialogDivStatement = document.createElement('div');
         dialogDivStatement.style.width = "100%";
-        dialogDivStatement.textContent = NPCName + " says:";
+        dialogDivStatement.textContent = NPCName + " " + NPCTalkAction +": ";
         var dialogDivStatement2 = document.createElement('div');
         dialogDivStatement2.style.width = "100%";
         dialogDivStatement2.style.marginBottom = "1em";

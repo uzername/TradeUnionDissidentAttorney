@@ -1,3 +1,4 @@
+import StringsTraslation from "../strings.js"
 /*
  * it is console in office
  */
@@ -21,5 +22,9 @@ export default class PROP_ConOffice extends Phaser.Physics.Arcade.Image {
     }
     getTalkOptions() {
         return ["Yes, okay", "No way!", "All right, I just shut it down"];
+    }
+    getTalkAction() {
+        var initializedStrings = new StringsTraslation();
+        return initializedStrings.lines[initializedStrings.currentLanguage]['Reaction_Display'];
     }
 }

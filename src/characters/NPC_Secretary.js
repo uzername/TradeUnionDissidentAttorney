@@ -1,5 +1,6 @@
+import StringsTraslation from "../strings.js"
 /*
-* it sort of duplicates NPC_Boss
+* it sort of duplicates NPC_Boss but it is secretary
 */
 export default class NPC_Secretary extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, type = "right") {
@@ -42,5 +43,9 @@ export default class NPC_Secretary extends Phaser.Physics.Arcade.Sprite {
     }
     getTalkOptions() {
         return ["Yes, okay", "No way!", "All right, I just leave"];
+    }
+    getTalkAction() {
+        var initializedStrings = new StringsTraslation();
+        return initializedStrings.lines[initializedStrings.currentLanguage]['Reaction_Say'];
     }
 }

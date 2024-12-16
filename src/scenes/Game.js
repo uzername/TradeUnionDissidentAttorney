@@ -71,6 +71,10 @@ export default class Game extends Phaser.Scene {
             "frontdecor",
             this.tileSet
         );
+        this.frontdecorLayer = this.tileMap.createLayer(
+            "frontdecor2",
+            this.tileSet
+        );
         /*
         this.platformLayer.setCollisionByProperty({
             collide: true
@@ -130,8 +134,9 @@ export default class Game extends Phaser.Scene {
     addBackground() {
     this.background = this.add
         .tileSprite(0, 0, this.width, this.height, "landscape")
-        .setOrigin(0)
-        .setScrollFactor(0, 1);
+        .setScale(0.5)
+        .setOrigin(-0.5)
+        .setScrollFactor(0, 0);
 }
     /*
     * add coliders between various other entities - friends and enemies
@@ -181,8 +186,9 @@ export default class Game extends Phaser.Scene {
             var NPCTalkStatement = NPCObject.getTalkStatement();
             var NPCTalkVariants = NPCObject.getTalkOptions();
             var NPCName_Localized = initializedStrings.lines[initializedStrings.currentLanguage][NPCObject.name];
+            var NPCTalkAction = NPCObject.getTalkAction();
             if (this.MyDialogManagerPlugin2Inst.wasDialogOpened == false) {
-                this.MyDialogManagerPlugin2Inst.InitiateTalk(NPCTalkStatement, NPCTalkVariants, NPCName_Localized);
+                this.MyDialogManagerPlugin2Inst.InitiateTalk(NPCTalkStatement, NPCTalkVariants, NPCName_Localized, NPCTalkAction);
             } else {
                 this.MyDialogManagerPlugin2Inst.UnInitiateTalk()
             }
