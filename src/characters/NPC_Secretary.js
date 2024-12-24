@@ -44,6 +44,19 @@ export default class NPC_Secretary extends Phaser.Physics.Arcade.Sprite {
     getTalkOptions() {
         return ["Yes, okay", "No way!", "All right, I just leave"];
     }
+    getTalkFunctors() {
+        return [
+            function () {
+                console.log("Option 1 secretary talk");
+            },
+            function () {
+                console.log("Option 2 secretary talk");
+            },
+            function () {
+                console.log("Option 3 secretary talk");
+            }
+        ]
+    }
     getTalkAction() {
         var initializedStrings = new StringsTraslation();
         return initializedStrings.lines[initializedStrings.currentLanguage]['Reaction_Say'];

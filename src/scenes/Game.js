@@ -187,8 +187,9 @@ export default class Game extends Phaser.Scene {
             var NPCTalkVariants = NPCObject.getTalkOptions();
             var NPCName_Localized = initializedStrings.lines[initializedStrings.currentLanguage][NPCObject.name];
             var NPCTalkAction = NPCObject.getTalkAction();
+            var NPCTalkFunctions = NPCObject.getTalkFunctors();
             if (this.MyDialogManagerPlugin2Inst.wasDialogOpened == false) {
-                this.MyDialogManagerPlugin2Inst.InitiateTalk(NPCTalkStatement, NPCTalkVariants, NPCName_Localized, NPCTalkAction);
+                this.MyDialogManagerPlugin2Inst.InitiateTalk(NPCTalkStatement, NPCTalkVariants, NPCName_Localized, NPCTalkAction, NPCTalkFunctions);
             } else {
                 this.MyDialogManagerPlugin2Inst.UnInitiateTalk()
             }

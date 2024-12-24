@@ -23,6 +23,23 @@ export default class PROP_ConOffice extends Phaser.Physics.Arcade.Image {
     getTalkOptions() {
         return ["Yes, okay", "No way!", "All right, I just shut it down"];
     }
+    getTalkFunctors() {
+        var thisthis = this;
+        return [
+            function () {
+                console.log("Option 1 Console");
+                thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+            },
+            function () {
+                console.log("Option 2 Console");
+                thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+            },
+            function () {
+                console.log("Option 3 Console");
+                thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+            }
+        ]
+    }
     getTalkAction() {
         var initializedStrings = new StringsTraslation();
         return initializedStrings.lines[initializedStrings.currentLanguage]['Reaction_Display'];

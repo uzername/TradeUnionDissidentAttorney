@@ -34,9 +34,12 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
      * open a chat window with such options:
      * @param {String} NPCTalkStatement String that shows statement of NPC
      * @param {Array<String>} NPCTalkVariants  list of strings that indicate possible answers
+     * @param {String} NPCName name of character to use
+     * @param {String} NPCTalkAction word that describes how does this character brings information to us
+     * @param {Array<Function>} ListOfActions list of callbacks for NPCTalkVariants
      */
      
-    InitiateTalk(NPCTalkStatement, NPCTalkVariants, NPCName, NPCTalkAction ) {
+    InitiateTalk(NPCTalkStatement, NPCTalkVariants, NPCName, NPCTalkAction, ListOfActions) {
         //an object with such fields: CanvasWidth, CanvasHeight, CanvasMarginLeft, CanvasMarginTop. I use it to calculate position of dialog.
         var geometryConfigObject = {
             CanvasWidth: this.game.canvas.style.width,
@@ -58,13 +61,18 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
         
         this.dialogDiv.appendChild(dialogDivStatement);
         this.dialogDiv.appendChild(dialogDivStatement2);
+        var indx = 0;
         for (var itemTalkVariant in NPCTalkVariants) {
             var dialogDivStatement3 = document.createElement('div');
             dialogDivStatement3.style.width = "100%";
             dialogDivStatement3.style.cursor = "pointer";
             dialogDivStatement3.style.marginBottom = "0.5em";
-            dialogDivStatement3.textContent =" - "+NPCTalkVariants[itemTalkVariant];
+            dialogDivStatement3.textContent = " - " + NPCTalkVariants[itemTalkVariant];
+            if (ListOfActions.count < indx) {
+                dialogDivStatement3.onclick = ListOfActions[indx];
+            }
             this.dialogDiv.appendChild(dialogDivStatement3);
+            indx++;
         }
 
         var dialogDivInstructions = document.createElement('div');

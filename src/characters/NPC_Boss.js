@@ -53,6 +53,22 @@ export default class NPC_Boss extends Phaser.Physics.Arcade.Sprite {
     getTalkOptions() {
         return ["Understandable, have a good day", "Pleased to meet you", "All right, I just leave"];
     }
+    // return functional callbacks on what to do when player chooses some option of dialog. Returns list of functions. Things are getting overcomplicated
+    // NPC has scene, so I can potentially access DialogManager in there
+    // it should continue getTalkOptions, but function should return only one result not multiple, so I request second pass
+    getTalkFunctors() {
+        return [
+            function () {
+                console.log("Option 1 boss talk");
+            },
+            function () {
+                console.log("Option 2 boss talk");
+            },
+            function () {
+                console.log("Option 3 boss talk");
+            }
+        ]
+    }
     getTalkAction() {
         var initializedStrings = new StringsTraslation();
         return initializedStrings.lines[initializedStrings.currentLanguage]['Reaction_Say'];
