@@ -1,4 +1,5 @@
 import StringsTraslation from "../strings.js"
+import { OmniStateOfMind, ConOffice_States } from "../noosphere_nexus.js"
 /*
  * it is console in office
  */
@@ -18,27 +19,70 @@ export default class PROP_ConOffice extends Phaser.Physics.Arcade.Image {
 
     }
     getTalkStatement() {
-        return "This is Console in the office";
+        var initializedNoosphere = new OmniStateOfMind();
+        if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.Initial) {
+            return "This is Console in the office. What do you want to know about?";
+        } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.GunManual) {
+            return "This is how to safely handle your weapon...";
+        } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.HistoryManual) {
+            return "This is what happened in the world...";
+        } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.LawsManual) {
+            return "Every person who works in Legal domain should know laws...";
+        }
     }
     getTalkOptions() {
-        return ["Yes, okay", "No way!", "All right, I just shut it down"];
+        var initializedNoosphere = new OmniStateOfMind();
+        if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.Initial) {
+            return ["Gun Handling Manual", "History Review", "Laws Handbook", "All right, I just shut it down"];
+        } else {
+            return ["Get Back", "Turn Off"];
+        }
     }
     getTalkFunctors() {
         var thisthis = this;
-        return [
-            function () {
-                console.log("Option 1 Console");
-                thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
-            },
-            function () {
-                console.log("Option 2 Console");
-                thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
-            },
-            function () {
-                console.log("Option 3 Console");
-                thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
-            }
-        ]
+        var initializedNoosphere = new OmniStateOfMind();
+        if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.Initial) {
+            return [
+                function () {
+                    console.log("Option 1 Console");
+                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.GunManual;
+                    var newNPCTalkStatement = thisthis.getTalkStatement();
+                    var newNPCTalkVariants = thisthis.getTalkOptions();
+                    var newNPCTalkFunctions = thisthis.getTalkFunctors();
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UpdateTalk(newNPCTalkStatement, newNPCTalkVariants, newNPCTalkFunctions);
+                },
+                function () {
+                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.HistoryManual;
+                    console.log("Option 2 Console");
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+                },
+                function () {
+                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.LawsManual;
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+                },
+                function () {
+                    // bye bye
+                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+                }
+            ]
+        } else {
+            return [
+                function () {
+                    // back to first level of interaction
+                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    var newNPCTalkStatement = thisthis.getTalkStatement();
+                    var newNPCTalkVariants = thisthis.getTalkOptions();
+                    var newNPCTalkFunctions = thisthis.getTalkFunctors();
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UpdateTalk(newNPCTalkStatement, newNPCTalkVariants, newNPCTalkFunctions);
+                },
+                function () {
+                    // bye bye
+                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+                }
+            ]
+        }
     }
     getTalkAction() {
         var initializedStrings = new StringsTraslation();

@@ -10,9 +10,14 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
         this.setupUI(in_parentElement);
     }
     setupUI(parentElement) {
+        // ID applied to general Dialog window
         this.dialogId = "div-dialog"
+        // ID applied to NPC action
         this.dialogId_action = "div-dialog-action";
-        this.dialogClass_option = "div-dialog-option"
+        // ID applied to statement of NPC
+        this.dialogId_statement = "div-dialog-statement";
+        // class applied to all dialog options
+        this.dialogClass_option = "div-dialog-option";
         var dialogElement = document.getElementById("div-dialog");
         if (dialogElement != null) {
             this.dialogDiv = dialogElement;
@@ -53,11 +58,14 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
         this.dialogDiv.style.left = geometryConfigObject.marginLeft + "px";
         var dialogDivStatement = document.createElement('div');
         dialogDivStatement.style.width = "100%";
-        dialogDivStatement.textContent = NPCName + " " + NPCTalkAction +": ";
+        /// TODO split Name and Talk action into separate spans
+        dialogDivStatement.textContent = NPCName + " " + NPCTalkAction + ": ";
+        dialogDivStatement.id = this.dialogId_action;
         var dialogDivStatement2 = document.createElement('div');
         dialogDivStatement2.style.width = "100%";
         dialogDivStatement2.style.marginBottom = "1em";
         dialogDivStatement2.textContent = NPCTalkStatement;
+        dialogDivStatement2.id = this.dialogId_statement;
         
         this.dialogDiv.appendChild(dialogDivStatement);
         this.dialogDiv.appendChild(dialogDivStatement2);
@@ -65,10 +73,11 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
         for (var itemTalkVariant in NPCTalkVariants) {
             var dialogDivStatement3 = document.createElement('div');
             dialogDivStatement3.style.width = "100%";
+            dialogDivStatement3.className = this.dialogClass_option;
             dialogDivStatement3.style.cursor = "pointer";
             dialogDivStatement3.style.marginBottom = "0.5em";
             dialogDivStatement3.textContent = " - " + NPCTalkVariants[itemTalkVariant];
-            if (ListOfActions.count < indx) {
+            if (ListOfActions.length > indx) {
                 dialogDivStatement3.onclick = ListOfActions[indx];
             }
             this.dialogDiv.appendChild(dialogDivStatement3);
@@ -94,5 +103,32 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
         this.dialogDiv.innerHTML = '';
         this.dialogDiv.style.display = "none";
         this.wasDialogOpened = false;
+    }
+    /**
+     * re-assign values to already opened dialog
+     */
+    UpdateTalk(newNPCTalkStatement, newNPCTalkVariants, newListOfActions) {
+        var entryStatement = document.getElementById(this.dialogId_statement);
+        if (entryStatement != null) {
+            entryStatement.textContent = newNPCTalkStatement
+        }
+        // remove Talk Variants
+        this.dialogDiv.querySelectorAll("." + this.dialogClass_option).forEach(el => el.remove());
+
+        var indx = 0;
+        for (var itemTalkVariant in newNPCTalkVariants) {
+            var dialogDivStatement3 = document.createElement('div');
+            dialogDivStatement3.style.width = "100%";
+            dialogDivStatement3.className = this.dialogClass_option;
+            dialogDivStatement3.style.cursor = "pointer";
+            dialogDivStatement3.style.marginBottom = "0.5em";
+            dialogDivStatement3.textContent = " - " + newNPCTalkVariants[itemTalkVariant];
+            if (newListOfActions.length > indx) {
+                dialogDivStatement3.onclick = newListOfActions[indx];
+            }
+            this.dialogDiv.appendChild(dialogDivStatement3);
+            indx++;
+        }
+
     }
 }
