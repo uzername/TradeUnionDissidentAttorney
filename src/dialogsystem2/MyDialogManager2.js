@@ -55,6 +55,7 @@ export default class DialogManagerPlugin2 extends Phaser.Plugins.ScenePlugin {
         this.dialogDiv.style.display = "block";
         this.dialogDiv.style.width = geometryConfigObject.CanvasWidth;
         this.dialogDiv.style.height = "50%";
+        this.dialogDiv.style.overflow = "auto";
         this.dialogDiv.style.left = geometryConfigObject.marginLeft + "px";
         var dialogDivStatement = document.createElement('div');
         dialogDivStatement.style.width = "100%";

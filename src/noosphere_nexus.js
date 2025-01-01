@@ -26,6 +26,8 @@ export class StateOfSingleBeing {
         this.LifeMilestones = {};
         // this one is used in lengthy interactions
         this.StateOfDialog = -1;
+        // what is current `reset` or default state of dialog
+        this.StateOfDialogReset = -1;
     }
 }
 

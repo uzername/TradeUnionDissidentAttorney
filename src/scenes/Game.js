@@ -7,6 +7,7 @@ import NPC_Secretary from "../characters/NPC_Secretary";
 //import DialogConfig from "../dialogsystem/dialog_config"
 import StringsTraslation from "../strings.js"
 import PROP_ConOffice from "../props/PROP_ConOffice";
+import { OmniStateOfMind } from "../noosphere_nexus.js"
 
 export default class Game extends Phaser.Scene {
     constructor() {
@@ -191,6 +192,8 @@ export default class Game extends Phaser.Scene {
             if (this.MyDialogManagerPlugin2Inst.wasDialogOpened == false) {
                 this.MyDialogManagerPlugin2Inst.InitiateTalk(NPCTalkStatement, NPCTalkVariants, NPCName_Localized, NPCTalkAction, NPCTalkFunctions);
             } else {
+                var initializedNoosphere = new OmniStateOfMind();
+                initializedNoosphere.AllCharacterInfo[NPCObject.name].StateOfDialog = -1;
                 this.MyDialogManagerPlugin2Inst.UnInitiateTalk()
             }
         }

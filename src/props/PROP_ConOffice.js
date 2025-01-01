@@ -20,22 +20,33 @@ export default class PROP_ConOffice extends Phaser.Physics.Arcade.Image {
     }
     getTalkStatement() {
         var initializedNoosphere = new OmniStateOfMind();
+        var initializedStrings = new StringsTraslation();
         if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.Initial) {
             return "This is Console in the office. What do you want to know about?";
         } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.GunManual) {
             return "This is how to safely handle your weapon...";
         } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.HistoryManual) {
-            return "This is what happened in the world...";
+            return initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_HistoryReviewText'];
         } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.LawsManual) {
             return "Every person who works in Legal domain should know laws...";
         }
     }
     getTalkOptions() {
         var initializedNoosphere = new OmniStateOfMind();
+        var initializedStrings = new StringsTraslation();
         if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.Initial) {
-            return ["Gun Handling Manual", "History Review", "Laws Handbook", "All right, I just shut it down"];
+            
+            return [
+                initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_GunHandling'],
+                initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_HistoryReview'],
+                initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_LawsHandbook'],
+                initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_CommandShutdown']
+            ];
         } else {
-            return ["Get Back", "Turn Off"];
+            return [
+                initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_CommandBack'],
+                initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_CommandShutdown']
+            ];
         }
     }
     getTalkFunctors() {
@@ -44,7 +55,6 @@ export default class PROP_ConOffice extends Phaser.Physics.Arcade.Image {
         if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.Initial) {
             return [
                 function () {
-                    console.log("Option 1 Console");
                     initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.GunManual;
                     var newNPCTalkStatement = thisthis.getTalkStatement();
                     var newNPCTalkVariants = thisthis.getTalkOptions();
@@ -53,12 +63,17 @@ export default class PROP_ConOffice extends Phaser.Physics.Arcade.Image {
                 },
                 function () {
                     initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.HistoryManual;
-                    console.log("Option 2 Console");
-                    thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+                    var newNPCTalkStatement = thisthis.getTalkStatement();
+                    var newNPCTalkVariants = thisthis.getTalkOptions();
+                    var newNPCTalkFunctions = thisthis.getTalkFunctors();
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UpdateTalk(newNPCTalkStatement, newNPCTalkVariants, newNPCTalkFunctions);
                 },
                 function () {
                     initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.LawsManual;
-                    thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+                    var newNPCTalkStatement = thisthis.getTalkStatement();
+                    var newNPCTalkVariants = thisthis.getTalkOptions();
+                    var newNPCTalkFunctions = thisthis.getTalkFunctors();
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UpdateTalk(newNPCTalkStatement, newNPCTalkVariants, newNPCTalkFunctions);
                 },
                 function () {
                     // bye bye
