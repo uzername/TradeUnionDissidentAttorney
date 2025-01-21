@@ -22,9 +22,9 @@ export default class PROP_ConOffice extends Phaser.Physics.Arcade.Image {
         var initializedNoosphere = new OmniStateOfMind();
         var initializedStrings = new StringsTraslation();
         if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.Initial) {
-            return "This is Console in the office. What do you want to know about?";
+            return initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_Initial'];
         } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.GunManual) {
-            return "This is how to safely handle your weapon...";
+            return initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_GunHandlingText'];
         } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.HistoryManual) {
             return initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_HistoryReviewText'];
         } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.LawsManual) {
