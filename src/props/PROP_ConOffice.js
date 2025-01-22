@@ -28,7 +28,7 @@ export default class PROP_ConOffice extends Phaser.Physics.Arcade.Image {
         } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.HistoryManual) {
             return initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_HistoryReviewText'];
         } else if (initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog == ConOffice_States.LawsManual) {
-            return "Every person who works in Legal domain should know laws...";
+            return initializedStrings.lines[initializedStrings.currentLanguage]['ConOffice_LawsHandbookText'];
         }
     }
     getTalkOptions() {

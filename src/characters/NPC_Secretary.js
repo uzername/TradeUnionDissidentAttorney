@@ -39,7 +39,9 @@ export default class NPC_Secretary extends Phaser.Physics.Arcade.Sprite {
         
     }
     getTalkStatement() {
-        return "Hello, I am Secretary";
+        var initializedNoosphere = new OmniStateOfMind();
+        var initializedStrings = new StringsTraslation();
+        return initializedStrings.lines[initializedStrings.currentLanguage]['Secretary_Intro'];
     }
     getTalkOptions() {
         return ["Yes, okay", "No way!", "All right, I just leave"];
