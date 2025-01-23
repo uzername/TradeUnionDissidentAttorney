@@ -37,3 +37,7 @@ export const ConOffice_States = {
     HistoryManual: 1,
     LawsManual: 2
 }
+export const NPCSecretary_States = {
+    Initial : -1,
+    SmallTalkE: 0
+}

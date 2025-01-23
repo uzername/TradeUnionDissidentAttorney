@@ -28,7 +28,12 @@ export default class StringsTraslation {
                 ConOffice_CommandBack: "== BACK ==",
                 ConOffice_CommandShutdown: "== SHUTDOWN ==",
 
-                Secretary_Intro: "Good morning. You are on time today! There is a lot of job for you. The Boss is waiting at her office upstairs, she has already prepared the work plan for today."
+                Secretary_Intro: "Good morning. You are on time today! There is a lot of job for you. The Boss is waiting at her office upstairs, she has already prepared the work plan for today.",
+                Secretary_Q1OnMyWay: "Okay, on my way",
+                Secretary_Q1GoodBye: "See you later!",
+                Secretary_Q1WhatAreE: "What do those pictures with E mean?",
+                Secretary_A1WhatAreE: "Those are motivational posters. E is a call for action and interactivity. E - to act!",
+                
             },
             
             "RU": {
@@ -50,7 +55,11 @@ export default class StringsTraslation {
                 ConOffice_CommandBack: "== НАЗАД ==",
                 ConOffice_CommandShutdown: "== ВЫКЛЮЧИТЬ ==",
 
-                Secretary_Intro: "Доброе утро. Сегодня вы пришли вовремя! Вас ждет много дел.Руководитель в своем кабинете на верхнем этаже, она уже подготовила план работы на сегодня."
+                Secretary_Intro: "Доброе утро. Сегодня вы пришли вовремя! Вас ждет много дел.Руководитель в своем кабинете на верхнем этаже, она уже подготовила план работы на сегодня.",
+                Secretary_Q1OnMyWay: "Хорошо, уже иду",
+                Secretary_Q1GoodBye: "Встретимся позже!",
+                Secretary_Q1WhatAreE: "Что означают эти картинки с буквой E?",
+                Secretary_A1WhatAreE: "Это мотивационные плакаты. Е — призыв к действию и интерактивности. Е — значит действовать!"
             },
             "UA": {
                 "Attorney": "Адвокат",
@@ -72,6 +81,10 @@ export default class StringsTraslation {
                 ConOffice_CommandShutdown: "== ВИМКНУТИ ==",
 
                 Secretary_Intro: "Доброго ранку. Сьогодні ви прийшли вчасно! На вас чекає багато справ. Керівник у своєму кабінеті на верхньому поверсі, вона вже підготувала план роботи на сьогодні",
+                Secretary_Q1OnMyWay: "Добре, вже йду",
+                Secretary_Q1GoodBye: "Зустрінемось згодом!",
+                Secretary_Q1WhatAreE: "Що означають ті картинки з Е?",
+                Secretary_A1WhatAreE: "Це мотиваційні плакати. E — це заклик до дії та інтерактивності. Е - значить діяти!"
             }
             
         }

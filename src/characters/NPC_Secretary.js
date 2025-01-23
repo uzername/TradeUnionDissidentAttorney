@@ -1,4 +1,5 @@
 import StringsTraslation from "../strings.js"
+import { OmniStateOfMind, NPCSecretary_States } from "../noosphere_nexus.js"
 /*
 * it sort of duplicates NPC_Boss but it is secretary
 */
@@ -41,23 +42,66 @@ export default class NPC_Secretary extends Phaser.Physics.Arcade.Sprite {
     getTalkStatement() {
         var initializedNoosphere = new OmniStateOfMind();
         var initializedStrings = new StringsTraslation();
-        return initializedStrings.lines[initializedStrings.currentLanguage]['Secretary_Intro'];
+        if (initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog == NPCSecretary_States.Initial) {
+            return initializedStrings.lines[initializedStrings.currentLanguage]['Secretary_Intro'];
+        } else if (initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog == NPCSecretary_States.SmallTalkE) {
+            return initializedStrings.lines[initializedStrings.currentLanguage]['Secretary_A1WhatAreE'];
+        }
+        
     }
     getTalkOptions() {
-        return ["Yes, okay", "No way!", "All right, I just leave"];
+        var initializedNoosphere = new OmniStateOfMind();
+        var initializedStrings = new StringsTraslation();
+        if (initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog == NPCSecretary_States.Initial) {
+            return [
+                initializedStrings.lines[initializedStrings.currentLanguage]['Secretary_Q1WhatAreE'],
+                initializedStrings.lines[initializedStrings.currentLanguage]['Secretary_Q1OnMyWay'],
+                initializedStrings.lines[initializedStrings.currentLanguage]['Secretary_Q1GoodBye']
+            ]
+        } else if (initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog == NPCSecretary_States.SmallTalkE) {
+            return [
+                initializedStrings.lines[initializedStrings.currentLanguage]['Secretary_Q1OnMyWay'],
+                initializedStrings.lines[initializedStrings.currentLanguage]['Secretary_Q1GoodBye']
+            ];
+        }
     }
     getTalkFunctors() {
-        return [
-            function () {
-                console.log("Option 1 secretary talk");
-            },
-            function () {
-                console.log("Option 2 secretary talk");
-            },
-            function () {
-                console.log("Option 3 secretary talk");
-            }
-        ]
+        var thisthis = this;
+        var initializedNoosphere = new OmniStateOfMind();
+        if (initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog == NPCSecretary_States.Initial) {
+            return [
+                function () {
+                    initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog = NPCSecretary_States.SmallTalkE;
+                    var newNPCTalkStatement = thisthis.getTalkStatement();
+                    var newNPCTalkVariants = thisthis.getTalkOptions();
+                    var newNPCTalkFunctions = thisthis.getTalkFunctors();
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UpdateTalk(newNPCTalkStatement, newNPCTalkVariants, newNPCTalkFunctions);
+                },
+                function () {
+                    // bye bye
+                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+                },
+                function () {
+                    // bye bye
+                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+                }
+            ]
+        } else if (initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog == NPCSecretary_States.SmallTalkE) {
+            return [
+                function () {
+                    // bye bye
+                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+                },
+                function () {
+                    // bye bye
+                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
+                }
+            ]
+        }
     }
     getTalkAction() {
         var initializedStrings = new StringsTraslation();
