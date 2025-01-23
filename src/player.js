@@ -33,6 +33,8 @@ class Player extends Phaser.GameObjects.Sprite {
         this.A = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.S = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.D = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        // shift key to switch from walk to running
+        this.ShiftShift = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
         // use
         this.E = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
     }
@@ -147,7 +149,7 @@ class Player extends Phaser.GameObjects.Sprite {
         } else if (this.cursor.right.isDown || this.D.isDown) {
             if ((this.scene.MyDialogManagerPlugin2Inst != null) && (this.scene.MyDialogManagerPlugin2Inst.wasDialogOpened)) { return; }
             var isRunning = false;
-            if ((this.cursor.right.shiftKey)|| (this.D.shiftKey)) {
+            if ((this.cursor.right.shiftKey) || (this.D.shiftKey) || this.ShiftShift.isDown) {
                 isRunning = true;
             }
             this.shooting = false;
@@ -169,7 +171,7 @@ class Player extends Phaser.GameObjects.Sprite {
             if ((this.scene.MyDialogManagerPlugin2Inst != null) && (this.scene.MyDialogManagerPlugin2Inst.wasDialogOpened)) { return; }
             this.shooting = false;
             var isRunning = false;
-            if ((this.cursor.left.shiftKey)|| (this.A.shiftKey)) {
+            if ((this.cursor.left.shiftKey)|| (this.A.shiftKey) || this.ShiftShift.isDown) {
                 isRunning = true;
             }
             if (this.body.blocked.down) {
