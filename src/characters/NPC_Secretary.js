@@ -79,12 +79,12 @@ export default class NPC_Secretary extends Phaser.Physics.Arcade.Sprite {
                 },
                 function () {
                     // bye bye
-                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog = NPCSecretary_States.Initial;
                     thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
                 },
                 function () {
                     // bye bye
-                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog = NPCSecretary_States.Initial;
                     thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
                 }
             ]
@@ -92,12 +92,12 @@ export default class NPC_Secretary extends Phaser.Physics.Arcade.Sprite {
             return [
                 function () {
                     // bye bye
-                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog = NPCSecretary_States.Initial;
                     thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
                 },
                 function () {
                     // bye bye
-                    initializedNoosphere.AllCharacterInfo.PROP_ConOffice.StateOfDialog = ConOffice_States.Initial;
+                    initializedNoosphere.AllCharacterInfo.NPC_Secretary.StateOfDialog = NPCSecretary_States.Initial;
                     thisthis.scene.MyDialogManagerPlugin2Inst.UnInitiateTalk();
                 }
             ]
