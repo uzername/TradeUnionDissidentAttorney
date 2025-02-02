@@ -33,7 +33,16 @@ export default class StringsTraslation {
                 Secretary_Q1GoodBye: "See you later!",
                 Secretary_Q1WhatAreE: "What do those pictures with E mean?",
                 Secretary_A1WhatAreE: "Those are motivational posters. E is a call for action and interactivity. E - to act!",
-                
+
+                Boss_Intro: "Good morning. We have received many requests for assistance from those who have been detained for obstructing trade union activities.",
+                Boss_Q1Investigation: "I think, I recall investigation routine. May you please fill in a Mandate and then I shall a visit a Correctional Center",
+                Boss_Q1: "Perhaps they were detained correctly, the city-state of Diamond has many opponents: both external and internal.",
+                Boss_Q2: "The Diamond City leadership is too preoccupied with finding traitors, this needs to be resolved!",
+                Boss_Q1InvestigationA: "Here it is. Now you may conduct your investigation freely. Do not forget to visit armory and pick up weapons",
+                Boss_Q1A1: "My experience suggests that all those who sought help are not guilty. You should find evidence that proves it. At the same time, investigate the activities of trade unions.",
+                Boss_Q2A1: "Really, the city-state of Diamond has many opponents, but those who have sought our help are not guilty. We need evidence of this.",
+                Boss_Q3: "Who are those people who were detained?",
+                Boss_Q3A1: "The list includes - Musician, Mechanic, Medic. Visit them in the Correctional Center"
             },
             
             "RU": {
@@ -59,7 +68,17 @@ export default class StringsTraslation {
                 Secretary_Q1OnMyWay: "Хорошо, уже иду",
                 Secretary_Q1GoodBye: "Встретимся позже!",
                 Secretary_Q1WhatAreE: "Что означают эти картинки с буквой E?",
-                Secretary_A1WhatAreE: "Это мотивационные плакаты. Е — призыв к действию и интерактивности. Е — значит действовать!"
+                Secretary_A1WhatAreE: "Это мотивационные плакаты. Е — призыв к действию и интерактивности. Е — значит действовать!",
+
+                Boss_Intro: "Доброе утро. К нам поступило много обращений о помощи от тех, кого задержали за препятствование деятельности профсоюзов",
+                Boss_Q1Investigation: "Я знаю последовательность расследования. Пожалуйста, заполните Поручение, а затем я посетю Исправительный Центр",
+                Boss_Q1: "Возможно их задержали по справедливости, у города-государства Бриллиант много противников: как внешних, так и внутренних",
+                Boss_Q2: "Руководство Бриллианта слишком обеспокоено поиском предателей, нужно навести в этом порядок!",
+                Boss_Q1InvestigationA: "Вот оно. Теперь вы можете свободно проводить расследование. Не забудьте посетить комнату хранения оружия",
+                Boss_Q1A1: "Мой опыт подсказывает, что все обратившиеся за помощью не виновны. Но нам нужны доказательства. И вы их найдете. Заодно расследуете деятельность профсоюзов",
+                Boss_Q2A1: "Действительно, у города-государства Бриллиант много противников, но обратившиеся за нашей помощью не должны. Нам нужны доказательства этого.",
+                Boss_Q3: "От кого поступили обращения?",
+                Boss_Q3A1: "В списке значится – Музыкант, Механик, Медик. Посетите их в Исправительном Центре"
             },
             "UA": {
                 "Attorney": "Адвокат",
@@ -84,7 +103,17 @@ export default class StringsTraslation {
                 Secretary_Q1OnMyWay: "Добре, вже йду",
                 Secretary_Q1GoodBye: "Зустрінемось згодом!",
                 Secretary_Q1WhatAreE: "Що означають ті картинки з Е?",
-                Secretary_A1WhatAreE: "Це мотиваційні плакати. E — це заклик до дії та інтерактивності. Е - значить діяти!"
+                Secretary_A1WhatAreE: "Це мотиваційні плакати. E — це заклик до дії та інтерактивності. Е - значить діяти!",
+
+                Boss_Intro: "Доброго ранку. До нас надійшло багато звернень про допомогу від тих, кого затримали за перешкоджання діяльності профспілок",
+                Boss_Q1Investigation: "Я знаю послідовність розслідування. Будь ласка, заповніть Доручення, а потім я відвідаю Виправний Центр",
+                Boss_Q1: "Можливо їх затримали по справедливості, у міста-держави Діамант багато противників : як зовнішніх, так і внутрішніх",
+                Boss_Q2: "Керівництво Діаманта занадто переймається пошуком зрадників, потрібно навести у цьому порядок!",
+                Boss_Q1InvestigationA: "Ось воно. Тепер ви можете вільно проводити розслідування. Не забудьте відвідати кімнату зберігання зброї",
+                Boss_Q1A1: "Мій досвід підказує, що всі ті хто звернувся за допомогою не винні. Але нам потрібні докази. І ви їх знайдете. Заодно розслідуєте діяльність профспілок",
+                Boss_Q2A1: "Насправді, у міста- держави Діамант багато противників, але ті хто звернувся за нашою допомогою не винні.Нам потрібні докази цього",
+                Boss_Q3: "Від кого надійшли звернення?",
+                Boss_Q3A1: "У списку значиться - Музикант, Механік, Медик. Відвідайте їх у Виправному Центрі",
             }
             
         }
