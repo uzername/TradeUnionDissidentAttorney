@@ -41,3 +41,14 @@ export const NPCSecretary_States = {
     Initial : -1,
     SmallTalkE: 0
 }
+export const NPCBoss_States = {
+    // Initial -> PickupMandate or Q1 or Q2
+    // Q1 or Q2 -> Q3
+    // Q3 -> PickupMandate
+    // 
+    Initial: -1,
+    PickupMandate: 0,
+    Q1: 1,
+    Q2: 2,
+    Q3: 3
+}

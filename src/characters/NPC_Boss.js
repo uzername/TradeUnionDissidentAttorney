@@ -1,4 +1,5 @@
 import StringsTraslation from "../strings.js"
+import { OmniStateOfMind, NPCBoss_States } from "../noosphere_nexus.js"
 export default class NPC_Boss extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, type = "right") {
         super(scene, x, y, "NPC_Boss");
@@ -48,15 +49,31 @@ export default class NPC_Boss extends Phaser.Physics.Arcade.Sprite {
     }
 
     getTalkStatement() {
-        return "Hello, I am Boss";
+        var initializedNoosphere = new OmniStateOfMind();
+        var initializedStrings = new StringsTraslation();
+        if (initializedNoosphere.AllCharacterInfo.NPC_Boss.StateOfDialog == NPCBoss_States.Initial) {
+            return initializedStrings.lines[initializedStrings.currentLanguage]['Boss_Intro'];
+        } else if (initializedNoosphere.AllCharacterInfo.NPC_Boss.StateOfDialog == NPCBoss_States.PickupMandate) {
+            return initializedStrings.lines[initializedStrings.currentLanguage]['Boss_Q1InvestigationA'];
+        } else if (initializedNoosphere.AllCharacterInfo.NPC_Boss.StateOfDialog == NPCBoss_States.Q1) {
+            return initializedStrings.lines[initializedStrings.currentLanguage]['Boss_Q1A1'];
+        } else if (initializedNoosphere.AllCharacterInfo.NPC_Boss.StateOfDialog == NPCBoss_States.Q2) {
+            return initializedStrings.lines[initializedStrings.currentLanguage]['Boss_Q2A1'];
+        } else if (initializedNoosphere.AllCharacterInfo.NPC_Boss.StateOfDialog == NPCBoss_States.Q3) {
+            return initializedStrings.lines[initializedStrings.currentLanguage]['Boss_Q3A1'];
+        }
     }
     getTalkOptions() {
+        var initializedNoosphere = new OmniStateOfMind();
+        var initializedStrings = new StringsTraslation();
         return ["Understandable, have a good day", "Pleased to meet you", "All right, I just leave"];
     }
     // return functional callbacks on what to do when player chooses some option of dialog. Returns list of functions. Things are getting overcomplicated
     // NPC has scene, so I can potentially access DialogManager in there
     // it should continue getTalkOptions, but function should return only one result not multiple, so I request second pass
     getTalkFunctors() {
+        var thisthis = this;
+        var initializedNoosphere = new OmniStateOfMind();
         return [
             function () {
                 console.log("Option 1 boss talk");
